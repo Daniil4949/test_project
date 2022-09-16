@@ -17,6 +17,7 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, )
+    img_url = models.TextField(null=True)
 
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
