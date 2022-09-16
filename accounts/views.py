@@ -7,6 +7,9 @@ from users.models import *
 from django.contrib.auth.forms import AuthenticationForm
 
 
+#TODO: Create appropriate classes for Authentication/Registration
+
+
 class RegisterUser(CreateView):
     form_class = RegistrationForm
     success_url = reverse_lazy('home')
@@ -14,7 +17,7 @@ class RegisterUser(CreateView):
 
 
 class LoginUser(LoginView):
-    form_class = AuthenticationForm
+    form_class = LoginUserForm
     template_name = "registration/login.html"
     model = CustomUser
     success_url = reverse_lazy('home')
