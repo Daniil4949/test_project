@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from users.models import CustomUser
 
 class Category(models.Model):
     name = models.CharField(max_length=40)
@@ -24,5 +24,12 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+
+class Cart(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"It is a book {self.book} of the user {self.user}"
 
 # Create your models here.

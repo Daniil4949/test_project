@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from users.models import *
 
 
@@ -11,7 +12,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'password1', 'password2', )
+        fields = ('username', 'email', 'password1', 'password2',)
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-input'}),
             'email': forms.EmailInput(attrs={'class': 'form-input'}),
@@ -29,7 +30,13 @@ class RegistrationForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-input'}),
+            'email': forms.EmailInput(attrs={'class': 'form-input'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-input'}),
+        }
+
     username = forms.CharField(label='login', widget=forms.TextInput(attrs={'class': 'form-input'})),
     email = forms.EmailField(label='email', widget=forms.EmailInput(attrs={'class': 'form-input'})),
-    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))    
+    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
