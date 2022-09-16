@@ -7,6 +7,9 @@ from users.models import *
 from django.contrib.auth.forms import AuthenticationForm
 
 
+#TODO: Create appropriate classes for Authentication/Registration
+
+
 class RegisterUser(CreateView):
     form_class = RegistrationForm
     success_url = reverse_lazy('home')
