@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for book in object_list %}
+{% for book in books %}
 <div class="container">
     <div class="shadow-sm p-3 mb-5 bg-body rounded">
         <div class="card" style="margin-top:55px; margin-bottom:20px;">
             <img src="{{ book.img_url }}" style="width: 18rem;" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{book.title}}</h5>
+                <h5 class="card-title">Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                     card's
                     content.</p>
