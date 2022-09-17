@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from users.models import CustomUser
 
+
 class Category(models.Model):
     name = models.CharField(max_length=40)
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
@@ -19,6 +20,7 @@ class Book(models.Model):
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, )
     img_url = models.TextField(null=True)
+    quantity = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
