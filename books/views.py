@@ -23,17 +23,6 @@ class CategoryBook(ListView):
         return Book.objects.filter(category=category)
 
 
-class CartInfo(ListView):
-    template_name = "menu/cart.html"
-    model = Cart
-    context_object_name = 'cart'
-    allow_empty = False
-
-    def get_queryset(self):
-        user = CustomUser.objects.get(email=self.kwargs['request.user.email'])
-        return Cart.objects.filter(user=user)
-
-
 class BookInfo(DetailView):
     template_name = "menu/book.html"
     model = Book
