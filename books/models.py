@@ -20,6 +20,7 @@ class Book(models.Model):
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, )
     img_url = models.TextField(null=True)
+    price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
 
     def get_absolute_url(self):
@@ -34,6 +35,6 @@ class Cart(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"It is a book {self.book} of the user {self.user}"
+        return f"Title: {self.book.title} | Price per book: {self.book.price}$"
 
 # Create your models here.

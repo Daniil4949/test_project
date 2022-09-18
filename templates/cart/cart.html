@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container" style="margin-top: 60px;">
-    <h1>{{ request.user.username }}</h1>
-    {% for book in cart %}
-    <p> <h3 style="margin-top: 60px;">{{ book }}</h3></p>
-    {% endfor %}
+    <table class="table">
+        <thead>
+        <tr class="table">
+            <th scope="col">Book</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in cart %}
+    <tr>
+
+      <td><h4>{{ book }}</h4></td>
+    </tr>
+        {% endfor %}
+  </tbody>
+
+    </table>
 </div>
 {% endblock %}
