@@ -11,7 +11,7 @@
                     card's
                     content.</p>
                 <p>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></p>
-                <a href="#" class="btn btn-dark">{{ book.title }}</a>
+                <a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a>
             </div>
         </div>
     </div>
