@@ -7,10 +7,15 @@
             <img src="{{ book.img_url }}" style="width: 18rem;" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{book.title}}</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                <p class="card-text">{{ book.info|linebreaks|truncatewords:50 }}<a href="{% url 'book' book.slug %}">read more</a></p>
                 <p>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></p>
+                <p>Price: {{book.price}}$</p>
+                <p>Book quantity: {{book.quantity}} </p>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    
+                </form>
+                <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
                 <a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a>
             </div>
         </div>

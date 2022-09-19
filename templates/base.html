@@ -57,18 +57,19 @@
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search book" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </form>
                 </div>
             </div>
         </div>
     </nav>
 </header>
-{% block content %}
 <body>
+<div>
+    {% block content %}
 
+    {% endblock %}
 </body>
-{% endblock %}
 <footer>
     <footer class="bg-dark text-center text-white" style="margin-top:850px;">
         <!-- Grid container -->
