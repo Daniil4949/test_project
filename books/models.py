@@ -22,7 +22,7 @@ class Book(models.Model):
     img_url = models.TextField(null=True)
     price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
-    author = models.ForeignKey('Author', null=True, blank=True, on_delete=models.CASCADE)
+
 
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
@@ -40,9 +40,6 @@ class Cart(models.Model):
         return f"Title: {self.book.title} | Price per book: {self.book.price}$"
 
 
-class Author(models.Model):
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length=30)
-    info = models.TextField()
+
 
 # Create your models here.
