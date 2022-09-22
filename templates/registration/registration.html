@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" action="{% url 'registration' %}" style="margin-top:160px; margin-bottom:500px;">
+<form method="post" action="{% url 'registration' %}" style="margin:160px; margin-bottom:500px;">
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         {% csrf_token %}
         <center>
