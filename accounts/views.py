@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 class RegisterUser(CreateView):
     form_class = RegistrationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')
     template_name = "registration/registration.html"
 
 

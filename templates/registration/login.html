@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" style="margin-top:60px;">
-    <div class="shadow-sm p-3 mb-5 bg-body rounded" style="margin-top:20px;">
+<form method="post" style="margin-top:160px; margin-bottom:500px;">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin-top:20px;">
         <div class="text-center">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-dark">Login</button>
+            <center><h3>Login</h3></center>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">password</span>
+                <input type="password" class="form-control" name="password" id="basic-url"
+                       placeholder="Enter your password"
+                       aria-describedby="basic-addon3">
+            </div>
+            <button type="submit" class="btn btn-dark">Submit</button>
         </div>
-    </div>
+    </>
 </form>
 {% endblock %}

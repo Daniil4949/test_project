@@ -40,6 +40,11 @@ class Cart(models.Model):
         return f"Title: {self.book.title} | Price per book: {self.book.price}$"
 
 
+class Author(models.Model):
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
+    description = models.TextField()
+
 
 
 # Create your models here.

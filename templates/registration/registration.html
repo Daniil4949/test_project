@@ -1,10 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" style="margin-top:60px;">
-    <div class="container">
+<form method="post" action="{% url 'registration' %}" style="margin-top:160px; margin-bottom:500px;">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-dark">Register</button>
+        <center>
+            <!--        Users' registration form-->
+            <h4>Registration</h4>
+        </center>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username"
+                   aria-describedby="basic-addon1">
         </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">.com</span>
+            <input type="email" class="form-control" name="email" id="basic-url" placeholder="Email"
+                   aria-describedby="basic-addon3">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">password</span>
+            <input type="password" class="form-control" name="password1" id="basic-url"
+                   placeholder="Enter your password"
+                   aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">password</span>
+            <input type="password" class="form-control" name="password2" id="basic-url"
+                   placeholder="Submit your password"
+                   aria-describedby="basic-addon3">
+        </div>
+        <center>{{ user_form.captcha }}</center>
+        <center>
+            <button type="submit" style="margin-top:20px;" class="btn btn-dark">Sign up</button>
+        </center>
+    </div>
 </form>
 {% endblock %}

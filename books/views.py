@@ -4,9 +4,6 @@ from .models import Category, Book, Cart
 from users.models import CustomUser
 
 
-# TODO: create all the classes for the cayegories and make it work in a right way
-
-
 class MainPage(ListView):
     model = Book
     template_name = "menu/main_page.html"
