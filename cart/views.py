@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from books.models import Cart, Book
+from .forms import SearchBookForm
 
+#TODO: It is necessary to implement search function
 
 def cart(request):
     cart = Cart.objects.filter(user=request.user)
@@ -30,5 +32,17 @@ def delete_all(request):
     delete_list = Cart.objects.filter(user=request.user)
     delete_list.delete()
     return redirect('cart')
+
+
+# def search_book(request):
+#     """Form for searching books"""
+#     search_form = SearchBookForm(request.POST)
+#     if request.method == 'POST':
+#         if search_form.is_valid():
+#             title = search_form.cleaned_data['title']
+#             books = Book.objects.filter(title__contains=str(title))
+#             return render(request, 'menu/category_books.html', {'books': books})
+#         return render(request, 'menu/category_books.html', {'books': books})
+#     return redirect('home')
 
 # Create your views here.
