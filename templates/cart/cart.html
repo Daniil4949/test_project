@@ -21,7 +21,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-bottom:700px;">
         Delete all selected books from the cart
     </button>
 
@@ -44,7 +44,7 @@
         </div>
     </div>
     {% else %}
-    <h4>Your cart is empty! You can choose something <a href="{% url 'home' %}">here</a></h4>
+    <h4 style="margin-bottom:900px;">Your cart is empty! You can choose something <a href="{% url 'home' %}">here</a></h4>
     {% endif %}
 </div>
 {% endblock %}
