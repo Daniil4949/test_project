@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<div style="margin:190px;">
-    <center><h2>Book Shop</h2></center>
+<div style="margin:120px;">
+    <center><h2><b>Book Shop</b></h2></center>
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
@@ -46,18 +46,15 @@
         <h3 style="margin-top:15px;"> {{ book.title }} </h3>
         <img src="{{book.img_url}}" style="width: 18rem;" class="card-img-top" alt="...">
         <div class="card-body" style="margin:15px;">
-            <h5 class="card-title">{{book.title}}</h5>
-            <p class="card-text">{{ book.info|linebreaks|truncatewords:50 }}<a href="{% url 'book' book.slug %}">read
-                more</a></p>
-            <p>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></p>
-            <p>Price: {{book.price}}$</p>
-            <p>Book quantity: {{book.quantity}} </p>
+            <p class="card-text"><h4>{{ book.info|linebreaks|truncatewords:70 }}<a href="{% url 'book' book.slug %}">read
+            more</a></h4></p>
+            <p><h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4></p>
+            <p><h4>Price: {{book.price}}$</h4></p>
+            <p><h4>Book quantity: {{book.quantity}} </h4></p>
             {% if request.user.is_authenticated %}
-            <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
+            <p><h4><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></h4></p>
             {% endif %}
-            <a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a>
-
-            <br>
+            <h4><a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a></h4>
         </div>
     </div>
 </div>
