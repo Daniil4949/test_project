@@ -59,4 +59,17 @@
     </div>
 </div>
 {% endfor %}
+{% if page_obj.has_other_pages %}
+<hr>
+<div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-lg">
+                {% for p in paginator.page_range %}
+                <li class="page-item"><a class="page-link" style="color:black;" href="?page={{p}}">{{p}}</a></li>
+                {% endfor %}
+
+        </ul>
+    </nav>
+</div>
+{% endif %}
 {% endblock %}

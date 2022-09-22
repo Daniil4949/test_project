@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Category, Book, Cart
 from users.models import CustomUser
-
+from django.core.paginator import Paginator
 
 #TODO: It is necessary to add pagination and model for buing books
 
+
 class MainPage(ListView):
+    paginate_by = 4
     model = Book
     template_name = "menu/main_page.html"
 
