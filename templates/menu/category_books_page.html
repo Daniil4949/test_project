@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
+
 {% for book in books %}
-<div class="container">
-    <div class="shadow-sm p-3 mb-5 bg-body rounded">
-        <div class="card" style="margin-top:55px; margin-bottom:20px;">
-            <img src="{{ book.img_url }}" style="width: 18rem;" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <p>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></p>
-                <a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a>
-            </div>
+<div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin:140px;">
+    <div class="row" style="padding:45px;">
+        <h3 style="margin-top:15px;"> {{ book.title }} </h3>
+        <img src="{{book.img_url}}" style="width: 18rem;" class="card-img-top" alt="...">
+        <div class="card-body" style="margin:15px;">
+            <h5 class="card-title">{{book.title}}</h5>
+            <p class="card-text">{{ book.info|linebreaks|truncatewords:50 }}<a href="{% url 'book' book.slug %}">read
+                more</a></p>
+            <p>Category:{{ book.category }}</p>
+            <p>Price: {{book.price}}$</p>
+            <p>Book quantity: {{book.quantity}} </p>
+            {% if request.user.is_authenticated %}
+            <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
+            {% endif %}
+            <a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a>
+
+            <br>
         </div>
     </div>
 </div>

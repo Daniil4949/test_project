@@ -4,6 +4,8 @@ from .models import Category, Book, Cart
 from users.models import CustomUser
 
 
+#TODO: It is necessary to add pagination and model for buing books
+
 class MainPage(ListView):
     model = Book
     template_name = "menu/main_page.html"
