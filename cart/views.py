@@ -34,6 +34,9 @@ def delete_all(request):
     return redirect('cart')
 
 
+def payment(request):
+    return render(request, 'cart/payment.html')
+
 # def search_book(request):
 #     """Form for searching books"""
 #     search_form = SearchBookForm(request.POST)

@@ -23,7 +23,6 @@ class Book(models.Model):
     price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
 
-
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
 
