@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'captcha',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,6 +132,9 @@ django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+RECAPTCHA_PUBLIC_KEY = '6Lf6rekgAAAAAApygNJRjsmZoGe42tkO-oh00oRQ'
+RECAPTCHA_PRIVATE_KEY = '6Lf6rekgAAAAABbig_0hV-nIqKIjcItD01E_8H5O'
+RECAPTCHA_REQUIRED_SCORE = 0.85
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

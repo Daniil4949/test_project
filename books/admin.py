@@ -16,7 +16,12 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ('book', 'user')
 
 
+
+
+
 admin.site.register(Book, BookAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Cart, CartAdmin)
+
+
 # Register your models here.
