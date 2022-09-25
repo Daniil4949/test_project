@@ -14,6 +14,7 @@ class MainPage(ListView):
 
 
 class Authors(ListView):
+    paginate_by = 4
     model = Author
     template_name = 'menu/authors.html'
 
@@ -34,5 +35,12 @@ class BookInfo(DetailView):
     model = Book
     context_object_name = 'book'
     slug_url_kwarg = 'book_slug'
+
+
+class AuthorInfo(DetailView):
+    template_name = "menu/author.html"
+    model = Author
+    context_object_name = 'author'
+    slug_url_kwarg = 'author_slug'
 
 # Create your views here.

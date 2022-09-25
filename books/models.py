@@ -22,6 +22,7 @@ class Book(models.Model):
     img_url = models.TextField(null=True)
     price = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
+    writer = models.ForeignKey('Author', null=True, blank=True, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
@@ -44,6 +45,9 @@ class Author(models.Model):
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
     img_url = models.TextField(null=True)
     info = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 

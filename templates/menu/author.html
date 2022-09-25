@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="margin-top:50px;">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+        <p>
+        <h1>{{ author.name }}</h1></p>
+        <img src="{{author.img_url}}" alt="..">
+        <p><h4>About the author: {{ author.info }}</h4></p>
+    </div>
+</div>
+
+{% endblock %}
