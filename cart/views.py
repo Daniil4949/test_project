@@ -4,6 +4,7 @@ from .forms import SearchBookForm
 
 #TODO: It is necessary to implement search function
 
+
 def cart(request):
     cart = Cart.objects.filter(user=request.user)
     return render(request, "cart/cart.html", {"cart": cart})
@@ -37,15 +38,16 @@ def delete_all(request):
 def payment(request):
     return render(request, 'cart/payment.html')
 
-# def search_book(request):
-#     """Form for searching books"""
-#     search_form = SearchBookForm(request.POST)
-#     if request.method == 'POST':
-#         if search_form.is_valid():
-#             title = search_form.cleaned_data['title']
-#             books = Book.objects.filter(title__contains=str(title))
-#             return render(request, 'menu/category_books.html', {'books': books})
-#         return render(request, 'menu/category_books.html', {'books': books})
-#     return redirect('home')
+
+def search_book(request):
+    """Form for searching books"""
+    search_form = SearchBookForm(request.POST)
+    if request.method == 'POST':
+        if search_form.is_valid():
+            title = search_form.cleaned_data['title']
+            books = Book.objects.filter(title__contains=str(title))
+            return render(request, 'menu/category_books_page.html', {'books': books})
+        return render(request, 'menu/category_books_page.html')
+    return redirect('home')
 
 # Create your views here.

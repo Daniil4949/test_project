@@ -7,5 +7,6 @@ urlpatterns = [
     path('delete_from_the_cart/<slug:book_slug>/', delete_from_the_cart, name='delete_from_the_cart'),
     path('delete_all/', delete_all, name='delete_all'),
     path('payment/', payment, name='payment'),
+    path('search_book/', search_book, name='search_book'),
 
 ]
