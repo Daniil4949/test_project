@@ -39,6 +39,12 @@ class Cart(models.Model):
         return f"Title: {self.book.title} | Price per book: {self.book.price}$"
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=40, default='Author')
+    slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
+    img_url = models.TextField(null=True)
+    info = models.TextField()
+
 
 
 

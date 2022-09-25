@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Category, Book, Cart
+from .models import Category, Book, Cart, Author
 from users.models import CustomUser
 from django.core.paginator import Paginator
 
@@ -11,6 +11,11 @@ class MainPage(ListView):
     paginate_by = 4
     model = Book
     template_name = "menu/main_page.html"
+
+
+class Authors(ListView):
+    model = Author
+    template_name = 'menu/authors.html'
 
 
 class CategoryBook(ListView):

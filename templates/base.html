@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Main page</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'authors' %}">Authors</a>
+                        </li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
