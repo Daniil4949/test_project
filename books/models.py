@@ -8,6 +8,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
 
     def get_absolute_url(self):
+        """You can use 'category.get_absolute_url' in html-templates"""
         return reverse('category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
@@ -25,6 +26,7 @@ class Book(models.Model):
     writer = models.ForeignKey('Author', null=True, blank=True, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
+        """You can use 'book.get_absolute_url' in html-templates"""
         return reverse('book', kwargs={'book_slug': self.slug})
 
     def __str__(self):
@@ -37,6 +39,7 @@ class Cart(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
+        """Method '__str__' if for the users and for the representation of the Book object"""
         return f"Title: {self.book.title} | Price per book: {self.book.price}$"
 
 
@@ -47,6 +50,7 @@ class Author(models.Model):
     info = models.TextField()
 
     def __str__(self):
+        """This method return the name of the author"""
         return f'{self.name}'
 
 
