@@ -4,7 +4,15 @@ from .models import Category, Book, Cart, Author
 from users.models import CustomUser
 from django.core.paginator import Paginator
 
-#TODO: It is necessary to add pagination and model for buing books
+"""TODO:
+    1. Create model for payment
+    2. Create validation for the cart(user cannot buy books more than defined in DB(books.quantity)
+    3. Create API (and I also would like to add registration with JWT)
+    Desired: 
+    1. Add comments
+    2. Add User's profile
+    3. Add ratings for the books
+"""
 
 
 class MainPage(ListView):
