@@ -21,10 +21,11 @@
         {% endfor %}
         </tbody>
     </table>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-bottom:700px;">
+    <a href="{% url 'check_the_cart' %}" type="button" class="btn btn-dark">Buy</a>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Delete all selected books from the cart
     </button>
-
+    <div style="margin-bottom:700px;"></div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

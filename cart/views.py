@@ -55,4 +55,16 @@ def search_book(request):
         return render(request, 'menu/category_books_page.html')
     return redirect('home')
 
+
+def check_the_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user)
+    problem_books = []
+    for book in cart:
+        if book.quantity > book.book.quantity:
+            problem_books.append(book)
+    if problem_books:
+        return render(request, "cart/fix_cart.html", {'books': problem_books})
+    return redirect('payment')
+
 # Create your views here.
