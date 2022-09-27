@@ -61,7 +61,8 @@
                     </ul>
                     <form class="d-flex" role="search" method="post" action="{% url 'search_book' %}">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search"  name="title" placeholder="Search book" aria-label="Search">
+                        <input class="form-control me-2" type="search" name="title" placeholder="Search book"
+                               aria-label="Search">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </form>
                 </div>
@@ -107,7 +108,10 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:white;">
+            © 2022 Copyright:
+            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <p>This project created with Python/Django and Bootstrap</p>
         </div>
         <!-- Copyright -->
     </footer>
