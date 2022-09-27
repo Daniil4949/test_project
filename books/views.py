@@ -6,8 +6,7 @@ from django.core.paginator import Paginator
 
 """TODO:
     1. Create model for payment
-    2. Create validation for the cart(user cannot buy books more than defined in DB(books.quantity)
-    3. Create API (and I also would like to add registration with JWT)
+    2. Create API (and I also would like to add registration with JWT)
     Desired: 
     1. Add comments
     2. Add User's profile
