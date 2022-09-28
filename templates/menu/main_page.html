@@ -1,60 +1,82 @@
 {% extends 'base.html' %}
+<!--template inheritance-->
 {% block content %}
+<!--the main content of the page-->
 <div style="margin:120px;">
-    <center><h2><b>Book Shop</b></h2></center>
+    <center>
+        <h2><b>Book Shop</b></h2>
+    </center>
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
+                    aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
+                    aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
+                    aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                         class="d-block w-100" alt="...">
+                        class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                         class="d-block w-100" alt="...">
+                        class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="https://images.unsplash.com/photo-1514593214839-ce1849100055?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-                         class="d-block w-100" alt="...">
+                        class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
 </div>
-<center><h1 style="margin-bottom:30px;">All the books</h1></center>
+<center>
+    <h1 style="margin-bottom:30px;">All the books</h1>
+</center>
+<!--object_list  - all the books-->
 {% for book in object_list %}
 <div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin:140px;">
     <div class="row" style="padding:45px;">
         <h3 style="margin-top:15px;"> {{ book.title }} </h3>
         <img src="{{book.img_url}}" style="width: 18rem;" class="card-img-top" alt="...">
         <div class="card-body" style="margin:15px;">
-            <p class="card-text"><h4>{{ book.info|linebreaks|truncatewords:70 }}<a href="{% url 'book' book.slug %}">read
-            more</a></h4></p>
-            <p><h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4></p>
-            <p><h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4></p>
-            <p><h4>Price: {{book.price}}$</h4></p>
-            <p><h4>Book quantity: {{book.quantity}} </h4></p>
+            <!--            truncatewords - only the defined number of the words will be seen-->
+            <p class="card-text">
+            <h4>{{ book.info|linebreaks|truncatewords:70 }}<a href="{% url 'book' book.slug %}">read
+                    more</a></h4>
+            </p>
+            <p>
+            <h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4>
+            </p>
+            <p>
+            <h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4>
+            </p>
+            <p>
+            <h4>Price: {{book.price}}$</h4>
+            </p>
+            <p>
+            <h4>Book quantity: {{book.quantity}} </h4>
+            </p>
             {% if request.user.is_authenticated %}
-            <p><h4><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></h4></p>
+            <!--            If you are not authorised you cannot add book to the cart-->
+            <p>
+            <h4><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></h4>
+            </p>
             {% endif %}
+            <!--            Here you can read all about the book-->
             <h4><a href="{% url 'book' book.slug %}" class="btn btn-dark">Read More</a></h4>
         </div>
     </div>
@@ -65,9 +87,10 @@
 <div class="container">
     <nav aria-label="Page navigation example">
         <ul class="pagination pagination-lg">
-                {% for p in paginator.page_range %}
-                <li class="page-item"><a class="page-link" style="color:black;" href="?page={{p}}">{{p}}</a></li>
-                {% endfor %}
+            <!--                page_range is defined in books/view.py-->
+            {% for p in paginator.page_range %}
+            <li class="page-item"><a class="page-link" style="color:black;" href="?page={{p}}">{{p}}</a></li>
+            {% endfor %}
 
         </ul>
     </nav>

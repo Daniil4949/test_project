@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<!--block 'if' is to check existing books-->
 {% if books %}
 {% for book in books %}
 <div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin:140px;">
@@ -9,12 +10,19 @@
         <img src="{{book.img_url}}" style="width: 18rem;" class="card-img-top" alt="...">
         <div class="card-body" style="margin:15px;">
             <h5>
-                <p class="card-text">{{ book.info|linebreaks|truncatewords:50 }}<a href="{% url 'book' book.slug %}">read
-                    more</a></p>
+                <p class="card-text">{{ book.info|linebreaks|truncatewords:50 }}<a
+                        href="{% url 'book' book.slug %}">read
+                        more</a></p>
                 <p>Category:{{ book.category }}</p>
-                <p><h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4></p>
-                <p><h4>Price: {{book.price}}$</h4></p>
-                <p><h4>Book quantity: {{book.quantity}}</h4> </p>
+                <p>
+                <h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4>
+                </p>
+                <p>
+                <h4>Price: {{book.price}}$</h4>
+                </p>
+                <p>
+                <h4>Book quantity: {{book.quantity}}</h4>
+                </p>
                 {% if request.user.is_authenticated %}
                 <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
                 {% endif %}
@@ -25,7 +33,10 @@
     </div>
 </div>
 {% endfor %}
+<!--If there are no books you would see this-->
 {% else %}
-<center><h2 style="margin-top:80px; margin-bottom:750px;">Sorry, but we do not have such book :(</h2></center>
+<center>
+    <h2 style="margin-top:80px; margin-bottom:750px;">Sorry, but we do not have such book :(</h2>
+</center>
 {% endif %}
 {% endblock %}

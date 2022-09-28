@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for author in object_list %}
+<!--object_list - all the authors-->
 <div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin:140px;">
     <div class="row" style="padding:45px;">
         <h3 style="margin-top:15px;"> {{ author.name }} </h3>
@@ -14,14 +15,16 @@
     </div>
 </div>
 {% endfor %}
+<!--This case for the situation when there are more than one page-->
 {% if page_obj.has_other_pages %}
 <hr>
 <div class="container">
     <nav aria-label="Page navigation example">
         <ul class="pagination pagination-lg">
-                {% for p in paginator.page_range %}
-                <li class="page-item"><a class="page-link" style="color:black;" href="?page={{p}}">{{p}}</a></li>
-                {% endfor %}
+            {% for p in paginator.page_range %}
+            <!--                page_range is defined in cart/view.py-->
+            <li class="page-item"><a class="page-link" style="color:black;" href="?page={{p}}">{{p}}</a></li>
+            {% endfor %}
 
         </ul>
     </nav>

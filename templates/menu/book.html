@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+<!--The page for the selected book-->
 <div class="container" style="margin-top:50px;">
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <p>
-        <h1>{{ book.title }}</h1></p>
+        <h1>{{ book.title }}</h1>
+        </p>
         <img src="{{book.img_url}}" alt="..">
-        <p><h4>Description: {{ book.info }}</h4></p>
-        <p><h4>Quantity: {{ book.quantity }}</h4></p>
-        <p><h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4></p>
-        <p><h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4></p>
-        <p><h4>Price: {{ book.price }}$</h4></p>
+        <p>
+        <h4>Description: {{ book.info }}</h4>
+        </p>
+        <p>
+        <h4>Quantity: {{ book.quantity }}</h4>
+        </p>
+        <p>
+        <h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4>
+        </p>
+        <p>
+        <h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4>
+        </p>
+        <p>
+        <h4>Price: {{ book.price }}$</h4>
+        </p>
         {% if request.user.is_authenticated %}
         <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
         {% endif %}

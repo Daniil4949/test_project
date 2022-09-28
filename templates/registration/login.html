@@ -3,6 +3,7 @@
 <form method="post" style="margin:160px; margin-bottom:500px;">
     <div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin-top:20px;">
         <div class="text-center">
+<!--            'csrf_token' is needed in all the forms in Django-->
             {% csrf_token %}
             <center><h3>Login</h3></center>
             <div class="input-group mb-3">
@@ -16,6 +17,7 @@
                        placeholder="Enter your password"
                        aria-describedby="basic-addon3">
             </div>
+<!--            Google captcha-->
             <center>{{ form.captcha }}</center>
             <button type="submit" class="btn btn-dark" style="margin-top:30px;">Submit</button>
         </div>

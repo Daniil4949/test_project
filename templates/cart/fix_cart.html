@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+<!--This page was created to prevent buying inappropriate quantity of books-->
 <div class="container" style="margin-bottom: 800px; margin-top:90px;">
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <h2>Sorry, {{ request.user.username }}, but we do not have quantity of the following books: </h2>
         {% for book in books %}
-        <p><h4>{{ book.book.title }} (Selected quantity: {{ book.quantity }} .Available quantity: {{book.book.quantity}})</h4></p>
+        <p>
+        <h4>{{ book.book.title }} (Selected quantity: {{ book.quantity }} .Available quantity: {{book.book.quantity}})</h4>
+        </p>
         {% endfor %}
         <h2>Please, manage Your Cart</h2>
     </div>
