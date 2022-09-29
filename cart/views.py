@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from books.models import Cart, Book
-from .forms import SearchBookForm
+from .forms import SearchBookForm, PaymentForm
+from .models import Payment
 from django.shortcuts import get_object_or_404
 
 
@@ -42,7 +43,24 @@ def delete_all(request):
 
 
 def payment(request):
+    payment_form = PaymentForm(request.POST)
+    if request.method == 'POST':
+        if payment_form.is_valid():
+            books_in_cart = Cart.objects.filter(user=request.user)
+            for selected_book in books_in_cart:
+                number_of_card = payment_form.cleaned_data['number_of_card']
+                validity_period = payment_form.cleaned_data['validity_period']
+                book = selected_book.book
+                book.quantity -= selected_book.quantity
+                book.save()
+                selected_book.delete()
+                Payment.objects.create(number_of_card=number_of_card, validity_period=validity_period, purchased_book=selected_book)
+                return redirect('home')
+        return render(request, 'cart/payment.html')
     return render(request, 'cart/payment.html')
+
+
+
 
 
 def search_book(request):

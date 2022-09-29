@@ -8,9 +8,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 
 
-#TODO: Create appropriate classes for Authentication/Registration
-
-
 class RegisterUser(CreateView):
     """View class for the registration"""
     form_class = RegistrationForm
