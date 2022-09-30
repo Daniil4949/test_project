@@ -69,6 +69,7 @@ def payment(request):
 
 
 def get_total_sum(request):
+    """Getting the total sum for the selected user in the cart"""
     result = 0
     books_in_cart = Cart.objects.filter(user=request.user)
     for book in books_in_cart:
