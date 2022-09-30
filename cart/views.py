@@ -43,14 +43,18 @@ def delete_all(request):
 
 
 def payment(request):
+    """total_sum - the total sum for the selected user.
+      selected_book - attribute of the model 'Cart',
+      it has fields 'book'(refers to the model Book),
+      quantity - quantity for payment in the cart.
+      Model 'Book' also has field 'quantity' but it
+      means all the books in the shop"""
     payment_form = PaymentForm(request.POST)
     books_in_cart = Cart.objects.filter(user=request.user)
     total_sum = get_total_sum(request)
     if request.method == 'POST':
         if payment_form.is_valid():
             for selected_book in books_in_cart:
-                number_of_card = payment_form.cleaned_data['number_of_card']
-                validity_period = payment_form.cleaned_data['validity_period']
                 book = selected_book.book
                 quantity_for_payment = selected_book.quantity
                 book.quantity -= selected_book.quantity
