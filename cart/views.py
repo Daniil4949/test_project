@@ -5,10 +5,20 @@ from .models import Payment
 from django.shortcuts import get_object_or_404
 
 
+def get_total_sum(request):
+    """Getting the total sum for the selected user in the cart"""
+    result = 0
+    books_in_cart = Cart.objects.filter(user=request.user)
+    for book in books_in_cart:
+        result += book.quantity * book.book.price
+    return result
+
+
 def cart(request):
     """Returns all the products and it's quantity for each user"""
+    total_sum = get_total_sum(request)
     cart = Cart.objects.filter(user=request.user)
-    return render(request, "cart/cart.html", {"cart": cart})
+    return render(request, "cart/cart.html", {"cart": cart, "total_sum": total_sum})
 
 
 def add_to_cart(request, book_slug):
@@ -66,15 +76,6 @@ def payment(request):
             return redirect('home')
         return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})
     return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})
-
-
-def get_total_sum(request):
-    """Getting the total sum for the selected user in the cart"""
-    result = 0
-    books_in_cart = Cart.objects.filter(user=request.user)
-    for book in books_in_cart:
-        result += book.quantity * book.book.price
-    return result
 
 
 def search_book(request):

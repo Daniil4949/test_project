@@ -5,8 +5,7 @@ from users.models import CustomUser
 from django.core.paginator import Paginator
 
 """TODO:
-    1. Create model for payment
-    2. Create API (and I also would like to add registration with JWT)
+    1. Improve design
     Desired: 
     1. Add comments
     2. Add User's profile

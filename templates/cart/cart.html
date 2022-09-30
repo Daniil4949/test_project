@@ -1,55 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container" style="margin-top: 60px;">
-    <h2>Your Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></h2>
-
-    {% if cart %}
-    <table class="table">
-        <thead>
+    <div class="shadow-none p-3 mb-5 bg-light rounded">
+        <h2>Your Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></h2>
+        {% if cart %}
+        <p>
+        <h2><b>Total price: {{ total_sum }}$</b></h2></p>
+        <table class="table">
+            <thead>
             <tr class="table">
                 <th scope="col">Book</th>
                 <th scope="col">Remove from the cart</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for book in cart %}
             <tr>
-
                 <td>
-                    <h4>{{ book }} | Selected quantity:{{ book.quantity }}</h4>
+                    <h4><a href="{% url 'book' book.book.slug %}">{{ book.book.title }}</a> | Price per book: {{ book.book.price }}$ | Selected quantity:{{ book.quantity }}</h4>
                 </td>
                 <th><a href="{% url 'delete_from_the_cart' book.book.slug %}"><i class="fa fa-trash" aria-hidden="true"
-                            style="color: red;"></i></a></th>
+                                                                                 style="color: red;"></i></a></th>
             </tr>
             {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'check_the_cart' %}" type="button" class="btn btn-dark">Buy</a>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Delete all selected books from the cart
-    </button>
-    <div style="margin-bottom:700px;"></div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are You sure about that?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a type="button" href="{% url 'delete_all' %}" class="btn btn-danger">Delete all</a>
+            </tbody>
+        </table>
+        <a href="{% url 'check_the_cart' %}" type="button" class="btn btn-dark">Buy</a>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete all selected books from the cart
+        </button>
+        <div style="margin-bottom:700px;"></div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are You sure about that?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a type="button" href="{% url 'delete_all' %}" class="btn btn-danger">Delete all</a>
+                    </div>
                 </div>
             </div>
         </div>
+        {% else %}
+        <h4 style="margin-bottom:900px;">Your cart is empty! You can choose something <a
+                href="{% url 'home' %}">here</a>
+        </h4>
+        {% endif %}
     </div>
-    {% else %}
-    <h4 style="margin-bottom:900px;">Your cart is empty! You can choose something <a href="{% url 'home' %}">here</a>
-    </h4>
-    {% endif %}
 </div>
 {% endblock %}
