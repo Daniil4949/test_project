@@ -44,23 +44,32 @@ def delete_all(request):
 
 def payment(request):
     payment_form = PaymentForm(request.POST)
+    books_in_cart = Cart.objects.filter(user=request.user)
+    total_sum = get_total_sum(request)
     if request.method == 'POST':
         if payment_form.is_valid():
-            books_in_cart = Cart.objects.filter(user=request.user)
             for selected_book in books_in_cart:
                 number_of_card = payment_form.cleaned_data['number_of_card']
                 validity_period = payment_form.cleaned_data['validity_period']
                 book = selected_book.book
+                quantity_for_payment = selected_book.quantity
                 book.quantity -= selected_book.quantity
                 book.save()
                 selected_book.delete()
-                Payment.objects.create(number_of_card=number_of_card, validity_period=validity_period, purchased_book=selected_book)
-                return redirect('home')
-        return render(request, 'cart/payment.html')
-    return render(request, 'cart/payment.html')
+                Payment.objects.create(number_of_card=payment_form.cleaned_data['number_of_card'],
+                                       validity_period=payment_form.cleaned_data['validity_period'],
+                                       purchased_book=book, quantity=quantity_for_payment)
+            return redirect('home')
+        return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})
+    return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})
 
 
-
+def get_total_sum(request):
+    result = 0
+    books_in_cart = Cart.objects.filter(user=request.user)
+    for book in books_in_cart:
+        result += book.quantity * book.book.price
+    return result
 
 
 def search_book(request):
