@@ -3,7 +3,7 @@ from .models import Payment
 
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('validity_period', 'purchased_book', 'quantity', 'date')
+    list_display = ('number_of_card', 'validity_period', 'purchased_book', 'quantity', 'date')
 
 
 admin.site.register(Payment, PaymentAdmin)
