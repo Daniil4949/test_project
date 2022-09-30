@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Category, Cart, Author
+from .models import Book, Category, Cart, Author, Rating
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -21,10 +21,14 @@ class AuthorAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('user', 'book', 'score')
+
+
 admin.site.register(Book, BookAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Author, AuthorAdmin)
-
+admin.site.register(Rating, RatingAdmin)
 
 # Register your models here.

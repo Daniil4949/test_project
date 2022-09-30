@@ -17,14 +17,23 @@
         <h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4>
         </p>
         <p>
-        <i><h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4></i>
+            <i><h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4></i>
         </p>
         <p>
-        <b><h4>Price: {{ book.price }}$</h4></b>
+            <b><h4>Price: {{ book.price }}$</h4></b>
         </p>
         {% if request.user.is_authenticated %}
         <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
         {% endif %}
+        <form class="rate-form" action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            <div id="confirm-box"></div>
+        </form>
     </div>
 </div>
 {% endblock %}
