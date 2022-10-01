@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
-from .models import Category, Book, Cart, Author
-from users.models import CustomUser
-from django.core.paginator import Paginator
+from django.views.generic import ListView, DetailView
+from .models import Category, Book, Author, Rating
+
 
 """TODO:
     1. Improve design
@@ -46,6 +45,24 @@ class BookInfo(DetailView):
     model = Book
     context_object_name = 'book'
     slug_url_kwarg = 'book_slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            rating = Rating.objects.get(user=self.request.user, book__slug=self.kwargs['book_slug'])
+            context['rating'] = rating
+            return context
+        except Exception as e:
+            return context
+
+
+def book_info(request, book_slug):
+    book = Book.objects.get(slug=book_slug)
+    try:
+        rating = Rating.objects.get(user=request.user, book__slug=book_slug)
+    except Exception as e:
+        rating = ''
+    return render(request, 'menu/book.html', {'book': book, 'rating': rating})
 
 
 class AuthorInfo(DetailView):

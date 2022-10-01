@@ -25,15 +25,18 @@
         {% if request.user.is_authenticated %}
         <p><a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a></p>
         {% endif %}
-        <form class="rate-form" action="" method="POST">
+        {% if request.user.is_authenticated %}
+        {{ rating.score }}
+        {% endif %}
+        <form class="rate-form" action="" method="POST" id="{{ rating.id }}">
             {% csrf_token %}
             <button type="submit" class="fa fa-star fa-3x my-btn checked" id="first"></button>
-            <button type="submit" class="fa fa-star fa-3x my-btn checked" id="second"></button>
+            <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
             <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
             <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
             <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
-            <div id="confirm-box"></div>
         </form>
+        <div id="confirm-box"></div>
     </div>
 </div>
 {% endblock %}
