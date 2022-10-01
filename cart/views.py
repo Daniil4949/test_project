@@ -1,5 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from books.models import Cart, Book
+from books.models import Cart, Book, Rating
 from .forms import SearchBookForm, PaymentForm
 from .models import Payment
 from django.shortcuts import get_object_or_404
@@ -100,5 +101,25 @@ def check_the_cart(request):
     if problem_books:
         return render(request, "cart/fix_cart.html", {'books': problem_books})
     return redirect('payment')
+
+
+def book_info(request, book_slug):
+    book = Book.objects.get(slug=book_slug)
+    try:
+        rating = Rating.objects.get(user=request.user, book__slug=book_slug)
+    except Exception as e:
+        rating = ''
+    return render(request, 'menu/book.html', {'book': book, 'rating': rating})
+
+
+def rate_book(request):
+    if request.method == 'POST':
+        el_id = request.POST.get('el_id')
+        val = request.POST.get('val')
+        rating = Rating.objects.get(id=el_id, user=request.user)
+        rating.score = val
+        rating.save()
+        return JsonResponse({'success': 'true', 'score': val}, safe=False)
+    return JsonResponse({'success': 'false'})
 
 # Create your views here.

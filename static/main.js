@@ -106,7 +106,7 @@ if (one) {
 
             $.ajax({
                 type: 'POST',
-                url: '/rate/',
+                url: '/cart/rate/',
                 data: {
                     'csrfmiddlewaretoken': csrf[0].value,
                     'el_id': id,
@@ -114,11 +114,11 @@ if (one) {
                 },
                 success: function(response){
                     console.log(response)
-                    confirmBox.innerHTML = `<h1>Successfully rated with ${response.score}</h1>`
+                    confirmBox.innerHTML = `<h4>Successfully rated with ${response.score}</h4>`
                 },
                 error: function(error){
                     console.log(error)
-                    confirmBox.innerHTML = '<h1>Ups... something went wrong</h1>'
+                    confirmBox.innerHTML = '<h4>Ups... something went wrong</h4>'
                 }
             })
         })

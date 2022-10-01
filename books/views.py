@@ -1,14 +1,16 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Category, Book, Author, Rating
-
+from django.views import View
+from django.views.generic.base import TemplateView
 
 """TODO:
     1. Improve design
+    2. Refactoring the code in books/views.py
     Desired: 
     1. Add comments
     2. Add User's profile
-    3. Add ratings for the books
 """
 
 
@@ -39,30 +41,36 @@ class CategoryBook(ListView):
         return Book.objects.filter(category=category)
 
 
-class BookInfo(DetailView):
+class BookInfo(View):
     """Page for the selected book"""
     template_name = "menu/book.html"
     model = Book
     context_object_name = 'book'
     slug_url_kwarg = 'book_slug'
+    http_method_names = ['get', 'post']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        try:
-            rating = Rating.objects.get(user=self.request.user, book__slug=self.kwargs['book_slug'])
-            context['rating'] = rating
-            return context
-        except Exception as e:
-            return context
+    def get(self, request, *args, **kwargs):
+        book_get = Book.objects.get(slug=self.kwargs['book_slug'])
+        if request.user.is_authenticated:
+            try:
+                rating = Rating.objects.get(user=self.request.user, book=book_get)
+            except Exception as e:
+                Rating.objects.create(user=self.request.user, book=book_get)
+                rating = Rating.objects.get(user=self.request.user, book=book_get)
+            return render(request, 'menu/book.html', {'book': book_get, 'rating': rating})
+        return render(request, 'menu/book.html', {'book': book_get})
 
+    def post(self, request, *args, **kwargs):
+        book_post = Book.objects.get(slug=self.kwargs['book_slug'])
 
-def book_info(request, book_slug):
-    book = Book.objects.get(slug=book_slug)
-    try:
-        rating = Rating.objects.get(user=request.user, book__slug=book_slug)
-    except Exception as e:
-        rating = ''
-    return render(request, 'menu/book.html', {'book': book, 'rating': rating})
+        if request.user.is_authenticated:
+            try:
+                rating = Rating.objects.get(user=self.request.user, book=book_post)
+            except Exception as e:
+                Rating.objects.create(user=self.request.user, book=book_post)
+                rating = Rating.objects.get(user=self.request.user, book=book_post)
+            return render(request, 'menu/book.html', {'book': book_post, 'rating': rating})
+        return render(request, 'menu/book.html', {'book': book_post})
 
 
 class AuthorInfo(DetailView):
