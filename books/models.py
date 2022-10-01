@@ -58,14 +58,15 @@ class Author(models.Model):
 class Rating(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0,
-                                validators=[
-                                    MaxValueValidator(5),
-                                    MinValueValidator(0),
-                                ]
-                            )
+    score = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0), ])
 
     def __str__(self):
         return f"{self.user}'s comment on {self.book}"
 
+
+class Comment(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+    text = models.TextField()
 # Create your models here.

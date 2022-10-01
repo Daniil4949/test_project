@@ -60,18 +60,6 @@ class BookInfo(View):
             return render(request, 'menu/book.html', {'book': book_get, 'rating': rating})
         return render(request, 'menu/book.html', {'book': book_get})
 
-    def post(self, request, *args, **kwargs):
-        book_post = Book.objects.get(slug=self.kwargs['book_slug'])
-
-        if request.user.is_authenticated:
-            try:
-                rating = Rating.objects.get(user=self.request.user, book=book_post)
-            except Exception as e:
-                Rating.objects.create(user=self.request.user, book=book_post)
-                rating = Rating.objects.get(user=self.request.user, book=book_post)
-            return render(request, 'menu/book.html', {'book': book_post, 'rating': rating})
-        return render(request, 'menu/book.html', {'book': book_post})
-
 
 class AuthorInfo(DetailView):
     """Page for the selected author"""
