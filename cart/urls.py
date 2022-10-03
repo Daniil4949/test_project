@@ -10,4 +10,5 @@ urlpatterns = [
     path('search_book/', search_book, name='search_book'),
     path('check_the_cart/', check_the_cart, name='check_the_cart'),
     path('rate/', rate_book, name='rate-view'),
+    path('add_comment/<slug:book_slug>/', add_comment, name='add_comment'),
 ]

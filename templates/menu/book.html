@@ -17,7 +17,7 @@
         <h4>Category: <a href="{% url 'category_books' book.category.slug %}">{{ book.category }}</a></h4>
         </p>
         <p>
-            <h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4>
+        <h4>Author: <a href="{% url 'author' book.writer.slug %}">{{ book.writer }}</a></h4>
         </p>
         <p>
             <b><h4>Price: {{ book.price }}$</h4></b>
@@ -37,6 +37,41 @@
         </form>
         <div id="confirm-box"></div>
         {% endif %}
+        <h2><center>You can discuss book here</center></h2>
+        {% for comment in comments %}
+        <div class="shadow p-3 mb-5 bg-body rounded">
+            <div class="card" style="margin-bottom: 10px;">
+                <div class="card-body">
+                    {% if request.user.username == comment.user.username %}
+                    <h5>
+                        <div><h5>You, {{ comment.date }}</h5></div>
+                    </h5>
+                    {% else %}
+                    <h5>
+                        <div><h5>{{ comment.user.username }}, {{ comment.date }}</h5></a>
+                        </div>
+                    </h5>
+                    {% endif %}
+                    <p class="card-text"> <h4>{{ comment.text }}</h4> </p>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+        <form method="POST" action="{% url 'add_comment' book.slug %}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <h5><label for="exampleFormControlTextarea1" class="form-label">Leave your comment below: </label></h5>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="3"></textarea>
+            </div>
+            <button type="submit" style="margin-top:20px; margin-bottom:20px;" class="btn btn-primary">Send comment
+            </button>
+        </form>
+
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

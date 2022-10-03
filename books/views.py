@@ -1,9 +1,7 @@
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Category, Book, Author, Rating
+from .models import Category, Book, Author, Rating, Comment
 from django.views import View
-from django.views.generic.base import TemplateView
 
 """TODO:
     1. Improve design
@@ -50,15 +48,16 @@ class BookInfo(View):
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
-        book_get = Book.objects.get(slug=self.kwargs['book_slug'])
+        book = Book.objects.get(slug=self.kwargs['book_slug'])
+        comments = Comment.objects.filter(book__slug=self.kwargs['book_slug'])
         if request.user.is_authenticated:
             try:
-                rating = Rating.objects.get(user=self.request.user, book=book_get)
+                rating = Rating.objects.get(user=self.request.user, book=book)
             except Exception as e:
-                Rating.objects.create(user=self.request.user, book=book_get)
-                rating = Rating.objects.get(user=self.request.user, book=book_get)
-            return render(request, 'menu/book.html', {'book': book_get, 'rating': rating})
-        return render(request, 'menu/book.html', {'book': book_get})
+                Rating.objects.create(user=self.request.user, book=book)
+                rating = Rating.objects.get(user=self.request.user, book=book)
+            return render(request, 'menu/book.html', {'book': book, 'rating': rating, 'comments': comments})
+        return render(request, 'menu/book.html', {'book': book, 'comments': comments})
 
 
 class AuthorInfo(DetailView):

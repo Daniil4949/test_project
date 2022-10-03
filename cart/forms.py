@@ -1,5 +1,5 @@
 from django import forms
-from books.models import Book
+from books.models import Book, Comment
 from .models import Payment
 
 
@@ -25,3 +25,12 @@ class PaymentForm(forms.ModelForm):
             'validity_period': forms.TextInput(attrs={'class': 'form-input'}),
             'cvv': forms.TextInput(attrs={'class': 'form-input'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    """Form for creation comments"""
+    text = forms.CharField(label='content', widget=forms.TextInput(attrs={'class': 'form-input'}))
+
+    class Meta:
+        model = Comment
+        fields = ('text',)

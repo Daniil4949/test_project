@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from books.models import Cart, Book, Rating
-from .forms import SearchBookForm, PaymentForm
+from books.models import Cart, Book, Rating, Comment
+from .forms import SearchBookForm, PaymentForm, CommentForm
 from .models import Payment
 from django.shortcuts import get_object_or_404
 
@@ -103,13 +103,17 @@ def check_the_cart(request):
     return redirect('payment')
 
 
-def book_info(request, book_slug):
-    book = Book.objects.get(slug=book_slug)
-    try:
-        rating = Rating.objects.get(user=request.user, book__slug=book_slug)
-    except Exception as e:
-        rating = ''
-    return render(request, 'menu/book.html', {'book': book, 'rating': rating})
+def add_comment(request, book_slug):
+    """Form for comment creation"""
+    comment_form = CommentForm(request.POST)
+    if request.method == 'POST':
+        if comment_form.is_valid():
+            book = Book.objects.get(slug=book_slug)
+            text = comment_form.cleaned_data['text']
+            Comment.objects.create(user=request.user, book=book, text=text)
+            return redirect('book', book_slug=book_slug)
+        return redirect('book', book_slug=book_slug)
+    return redirect('book', book_slug=book_slug)
 
 
 def rate_book(request):
