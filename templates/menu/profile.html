@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="container">
+        <div style="margin-top: 70px; margin-bottom: 720px;">
+            <h4>
+                <center>Your profile</center>
+            </h4>
+            <div class="input-group mb-3">
+                <h5>
+                    <center>We sure, that you are a talented person, {{request.user.username}}, write about yourself
+                    </center>
+                </h5>
+            </div>
+        </div>
+        {% endblock %}

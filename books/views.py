@@ -41,8 +41,6 @@ class CategoryBook(ListView):
 
 class BookInfo(View):
     """Page for the selected book"""
-    template_name = "menu/book.html"
-    model = Book
     context_object_name = 'book'
     slug_url_kwarg = 'book_slug'
     http_method_names = ['get', 'post']
