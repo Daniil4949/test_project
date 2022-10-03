@@ -5,6 +5,9 @@ from django.views.generic import CreateView
 from .forms import LoginUserForm, RegistrationForm
 from users.models import *
 from django.views import View
+from cart.models import Payment
+from books.models import Rating
+from django.shortcuts import get_object_or_404
 
 
 class RegisterUser(CreateView):
@@ -24,5 +27,14 @@ class LoginUser(LoginView):
 
 class Profile(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'menu/profile.html')
+        context = {}
+        rated_books = Rating.objects.filter(user=self.request.user).order_by('score')[:5]
+        try:
+            purchased_books = Payment.objects.filter(user=self.request.user)[:5]
+            context['purchased_books'] = purchased_books
+        except:
+            pass
+        if rated_books[0].score > 0:
+            context['rated_books'] = rated_books[::-1]
+        return render(request, 'menu/profile.html', context)
 # Create your views here.

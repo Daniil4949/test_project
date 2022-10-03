@@ -1,17 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="shadow-lg p-3 mb-5 bg-body rounded">
-    <div class="container">
-        <div style="margin-top: 70px; margin-bottom: 720px;">
-            <h4>
+<div class="container">
+    <div style="margin-top: 90px; margin-bottom: 720px;">
+        <div class="shadow-lg p-3 mb-5 bg-body rounded">
+            <h2>
                 <center>Your profile</center>
-            </h4>
-            <div class="input-group mb-3">
-                <h5>
-                    <center>We sure, that you are a talented person, {{request.user.username}}, write about yourself
-                    </center>
-                </h5>
-            </div>
+            </h2>
+            <center><h3>Your favourite books</h3></center>
+            <ol class="list-group list-group-numbered">
+                {% for book in rated_books %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{book.book.title}}</div>
+
+                    </div>
+                    <span class="badge bg-primary rounded-pill">Rating {{book.score}}/5</span>
+                </li>
+                {% endfor%}
+            </ol>
+            <center><h3>Your most purchased books</h3></center>
+            <ol class="list-group list-group-numbered">
+                {% for book in purchased_books %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{book.purchased_book.title}}</div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">Price {{book.purchased_book.price}}$</span>
+                </li>
+                {% endfor %}
+            </ol>
+
         </div>
-        {% endblock %}
+    </div>
+    {% endblock %}
