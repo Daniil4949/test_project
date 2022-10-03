@@ -7,8 +7,8 @@ from django.views import View
     1. Improve design
     2. Refactoring the code in books/views.py
     Desired: 
-    1. Add comments
-    2. Add User's profile
+    1. Use celery/redis
+    
 """
 
 

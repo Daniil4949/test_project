@@ -61,7 +61,7 @@ class Rating(models.Model):
     score = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0), ])
 
     def __str__(self):
-        return f"{self.user}'s comment on {self.book}"
+        return f"{self.user}'s rating on {self.book}"
 
 
 class Comment(models.Model):
