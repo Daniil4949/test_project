@@ -69,4 +69,7 @@ class Comment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
     text = models.TextField()
+
+    def __str__(self):
+        return f'This is a comment of {self.user.username} on the {self.book.title}'
 # Create your models here.
