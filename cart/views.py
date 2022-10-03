@@ -73,7 +73,7 @@ def payment(request):
                 selected_book.delete()
                 Payment.objects.create(number_of_card=payment_form.cleaned_data['number_of_card'],
                                        validity_period=payment_form.cleaned_data['validity_period'],
-                                       purchased_book=book, quantity=quantity_for_payment)
+                                       purchased_book=book, quantity=quantity_for_payment, user=request.user)
             return redirect('home')
         return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})
     return render(request, 'cart/payment.html', {'total_sum': total_sum, 'payment_form': payment_form})

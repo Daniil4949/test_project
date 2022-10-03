@@ -9,3 +9,4 @@ class Payment(models.Model):
     purchased_book = models.ForeignKey(Book, on_delete=models.PROTECT)
     quantity = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
