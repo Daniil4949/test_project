@@ -2,14 +2,15 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Category, Book, Author, Rating, Comment
 from django.views import View
+from django.shortcuts import get_object_or_404
 
-"""TODO:
-    1. Improve design
-    2. Refactoring the code in books/views.py
-    Desired: 
-    1. Use celery/redis
-    
-"""
+
+#  TODO:
+#    1. Improve design
+#    2. Refactoring the code in books/views.py
+#    Desired:
+#    1. Use celery/redis
+#    2. Use signals
 
 
 class MainPage(ListView):
@@ -51,7 +52,7 @@ class BookInfo(View):
         if request.user.is_authenticated:
             try:
                 rating = Rating.objects.get(user=self.request.user, book=book)
-            except Exception as e:
+            except:
                 Rating.objects.create(user=self.request.user, book=book)
                 rating = Rating.objects.get(user=self.request.user, book=book)
             return render(request, 'menu/book.html', {'book': book, 'rating': rating, 'comments': comments})
@@ -64,5 +65,9 @@ class AuthorInfo(DetailView):
     model = Author
     context_object_name = 'author'
     slug_url_kwarg = 'author_slug'
+
+
+def proposal(request):
+    return render(request, 'menu/review.html')
 
 # Create your views here.
