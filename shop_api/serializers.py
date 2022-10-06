@@ -1,12 +1,12 @@
 from cart.models import Cart, Payment
-from books.models import Book, Rating, Author, Category
+from books.models import Book, Rating, Author, Category, Comment
 from rest_framework import serializers
 
 
 class BookSerializer(serializers.Serializer):
     class Meta:
         model = Book
-        fields = ('title', 'info', 'price', 'quantity', 'writer', 'category')
+        fields = "__all__"
 
 
 class CategorySerializer(serializers.Serializer):
@@ -39,3 +39,6 @@ class PaymentSerializer(serializers.Serializer):
         fields = ('number_of_card', 'validity_period', 'purchased_book', 'quantity')
 
 
+class CommentSerializer(serializers.Serializer):
+    class Meta:
+        model = Comment
