@@ -25,5 +25,21 @@ class RatingApiList(generics.ListCreateAPIView):
     serializer_class = RatingSerializer
 
 
+class CommentApiUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
 
-# Create your views here.
+
+class AuthorApiUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = AuthorSerializer
+    queryset = Author.objects.all()
+
+
+class BooksApiUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+
+class RatingApiUpdate(generics.RetrieveUpdateAPIView):
+    serializer_class = RatingSerializer
+    queryset = Rating.objects.all()
