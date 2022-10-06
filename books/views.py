@@ -47,6 +47,9 @@ class BookInfo(View):
     http_method_names = ['get', 'post']
 
     def get(self, request, *args, **kwargs):
+        """Here we make query for getting the book by slug and the comments for the selected book.
+        There is try/except block. If user hasn't visited this page before the new 'rating' object would create for him.
+         I also would like to use signals for that"""
         book = Book.objects.get(slug=self.kwargs['book_slug'])
         comments = Comment.objects.filter(book__slug=self.kwargs['book_slug'])
         if request.user.is_authenticated:

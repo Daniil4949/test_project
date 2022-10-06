@@ -3,6 +3,7 @@ from .models import Book, Category, Cart, Author, Rating
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    """prepopulated field automatically create slug from the name of the category"""
     list_display = ('name',)
     prepopulated_fields = {"slug": ('name',)}
 

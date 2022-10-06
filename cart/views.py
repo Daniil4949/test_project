@@ -26,7 +26,7 @@ def add_to_cart(request, book_slug):
     """Block try/except is necessary because we try to find book firstly, and after that
     we add the selected book to the cart or increase books' quantity. if we do not use block try/except
     it would not work in a correct way because we cannot find book that does not exist. We can use 'get_object_or_404'
-    instead.' """
+    instead. """
     try:
         book = Book.objects.get(slug=book_slug)
         cart = Cart.objects.get(user=request.user, book=book)
@@ -92,6 +92,8 @@ def search_book(request):
 
 
 def check_the_cart(request):
+    """This method was created to check the quantity of the books in the shop.
+    User cannot buy more books than the number defined in the database"""
     user = request.user
     cart = Cart.objects.filter(user=user)
     problem_books = []
@@ -117,6 +119,7 @@ def add_comment(request, book_slug):
 
 
 def rate_book(request):
+    """The method for the books' ratings. The default value of the model 'rating' - 0"""
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
         val = request.POST.get('val')

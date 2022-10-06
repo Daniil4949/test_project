@@ -17,6 +17,8 @@ class Category(models.Model):
 
 
 class Book(models.Model):
+    """There are two foreign keys in the models: writer(the author) and the category.
+    the field 'foreign key' - one to mane rel. """
     title = models.CharField(max_length=50)
     info = models.TextField(null=True)
     slug = models.SlugField(max_length=1000, db_index=True, verbose_name='URL', null=True, blank=True, unique=True)
@@ -35,6 +37,9 @@ class Book(models.Model):
 
 
 class Cart(models.Model):
+    """The object 'Cart' has the user field and the selected book. It is additional
+    model for the cart. Actually it is just many to many rel because one book can be in many carts of users and
+    one user can add to the cart different books"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
@@ -56,6 +61,8 @@ class Author(models.Model):
 
 
 class Rating(models.Model):
+    """Object 'Rating' has own validation. The default score is equal to zero and
+    is the defined minimum. The max value of the score filed is equal to 5"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     score = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0), ])
@@ -65,6 +72,8 @@ class Rating(models.Model):
 
 
 class Comment(models.Model):
+    """ The object 'Comment' has two foreign keys - book and the user.
+    There also time of the creating comment, it is defined by default value"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)

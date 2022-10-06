@@ -26,6 +26,11 @@ class LoginUser(LoginView):
 
 
 class Profile(View):
+    """Here You can see try/except block for
+        getting all the data about the user, if there are no information
+        about the user, we just cannot get it, we do not have it in the 'context'
+        dict. But if there are some information about the user, we can get
+        the purchased books and the most rated books. """
     def get(self, request, *args, **kwargs):
         context = {}
         rated_books = Rating.objects.filter(user=self.request.user).order_by('score')[:5]
