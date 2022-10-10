@@ -1,11 +1,12 @@
 from django import forms
-from books.models import Book, Comment
+from .models import Feedback
 
-class SearchBookForm(forms.ModelForm):
+
+class FeedbackForm(forms.ModelForm):
     """Form for searching posts"""
-    title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class': 'form-input'})),
+    title = forms.CharField(label='Your feedback', widget=forms.TextInput(attrs={'class': 'form-input'})),
 
     class Meta:
-        model = Book
-        fields = ('title',)
+        model = Feedback
+        fields = ('text',)
 

@@ -73,6 +73,9 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'registration' %}">Sign up</a>
                         </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'feedback' %}">You can leave your opinion about the site here</a>
+                        </li>
                     </ul>
                     <form class="d-flex" role="search" method="post" action="{% url 'search_book' %}">
                         {% csrf_token %}

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Category, Book, Author, Rating, Comment
 from django.views import View
-from django.shortcuts import get_object_or_404
+from django.views.generic.edit import FormView
+from .forms import FeedbackForm
 
 
 #  TODO:
@@ -71,6 +72,14 @@ class AuthorInfo(DetailView):
 
 
 def proposal(request):
-    return render(request, 'menu/review.html')
+    return render(request, 'menu/feedback.html')
 
-# Create your views here.
+
+class FeedBackForm(FormView):
+    template_name = "menu/feedback.html"
+    form_class = FeedbackForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+

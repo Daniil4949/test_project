@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import MainPage, BookInfo, CategoryBook, Authors, AuthorInfo, proposal
+from .views import MainPage, BookInfo, CategoryBook, Authors, AuthorInfo,FeedBackForm
 
 
 urlpatterns = [
@@ -9,5 +9,5 @@ urlpatterns = [
     path('books/<slug:book_slug>/', BookInfo.as_view(), name='book'),
     path('authors/', Authors.as_view(), name='authors'),
     path('author/<slug:author_slug>/', AuthorInfo.as_view(), name='author'),
-    path('review/', proposal, name='review'),
+    path('feedback/', FeedBackForm.as_view(), name='feedback'),
 ]
