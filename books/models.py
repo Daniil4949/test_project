@@ -81,4 +81,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'This is a comment of {self.user.username} on the {self.book.title}'
+
+
+class Feedback(models.Model):
+    text = models.TextField(null=False)
+
+    def __str__(self):
+        return f"The text of the selected user's review: {self.text}"
+
 # Create your models here.
